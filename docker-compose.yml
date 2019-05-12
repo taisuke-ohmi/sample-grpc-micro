@@ -8,3 +8,11 @@ services:
     container_name: user
     ports:
     - "60000:60000"
+  task:
+    build:
+      context: ./
+      dockerfile: task/Dockerfile
+    image: sample-grpc-micro/task
+    container_name: task
+    ports:
+      - "60001:60000"
