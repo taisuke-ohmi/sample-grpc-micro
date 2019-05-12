@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package task;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+enum Status {
+    UNKNOWN = 0;
+    WAITING = 1;
+    WORKING = 2;
+    COMPLETED = 3;
+}
+
+message Task {
+    uint64 id = 1;
+    string name = 2;
+    Status status = 3;
+    uint64 user_id = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message CreateTaskRequest {
+    string name = 1;
+}
+
+message CreateTaskResponse {
+    Task task = 1;
+}
+
+message FindTasksResponse {
+    repeated Task tasks = 1;
+}
+
+service TaskService {
+    rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+    rpc FindTasks(google.protobuf.Empty) returns (FindTasksResponse);
+}
