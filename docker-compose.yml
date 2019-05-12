@@ -1,0 +1,10 @@
+version: '3'
+services:
+  user:
+    build:
+      context: ./
+      dockerfile: user/Dockerfile
+    image: sample-grpc-micro/user
+    container_name: user
+    ports:
+    - "60000:60000"
